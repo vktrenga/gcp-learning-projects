@@ -1,14 +1,12 @@
 #!/bin/bash
 
-sudo apt update
-sudo apt install -y python3-pip git
+apt update
+apt install -y python3-pip git
 
-cd /home
+git clone https://github.com/vktrenga/gcp-learning-projects.git
 
-git clone https://github.com/YOUR_GITHUB_USERNAME/fastapi-mig-project.git
-
-cd fastapi-mig-project
+cd gcp-learning-projects.git/fastapi-mig-ci-cd
 
 pip3 install -r requirements.txt
 
-nohup uvicorn app.main:app --host 0.0.0.0 --port 80 &
+nohup uvicorn main:app --host 0.0.0.0 --port 8000 &

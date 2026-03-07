@@ -20,26 +20,26 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: projects/927058090633/locations/global/workloadIdentityPools/mig-github-ci-cd-work-load/providers/github-provider
-          service_account: mig-github-ci-cd@first-rank-coders.iam.gserviceaccount.com
+          workload_identity_provider: projects/927058090633/locations/global/workloadIdentityPools/mig-ci-cd-github-work-load/providers/github-action-provider
+          service_account: mig-ci-cd-github@first-rank-coders.iam.gserviceaccount.com
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
 
       - name: Deploy new Instance Template
         run: |
-          gcloud compute instance-templates create fastapi-template-${{ github.run_number }} \
+          gcloud compute instance-templates create mig-ci-cd-github-${{ github.run_number }} \
           --machine-type=e2-micro \
-          --service-account=mig-github-ci-cd@first-rank-coders.iam.gserviceaccount.com \
+          --service-account=mig-ci-cd-github@first-rank-coders.iam.gserviceaccount.com\
           --tags=allow-fastapi \
           --metadata-from-file startup-script=fastapi-mig-ci-cd/startup.sh
     
       - name: Update MIG
         run: |
-          gcloud compute instance-groups managed set-instance-template mig-ci-cd \
-          --template fastapi-template-${{ github.run_number }} \
+          gcloud compute instance-groups managed set-instance-template mig-ci-cd-github \
+          --template mig-ci-cd-github-${{ github.run_number }} \
           --zone us-central1-c
       
       - name: Rolling update MIG
         run: |
-          gcloud compute instance-groups managed rolling-action replace mig-ci-cd \
+          gcloud compute instance-groups managed rolling-action replace mig-ci-cd-github \
             --zone us-central1-c

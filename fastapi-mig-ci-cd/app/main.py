@@ -6,11 +6,11 @@ app = FastAPI()
 @app.get("/")
 def home():
     return {
-        "message": "FastAPI MIG LoadBalancer",
+        "message": "FastAPI MIG LoadBalancer ",
         "host": socket.gethostname(),
         "port":  8000
     }
 
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    return {"status": "ok", "host": socket.gethostname(), "port": 8000}

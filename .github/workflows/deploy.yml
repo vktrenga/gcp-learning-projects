@@ -29,7 +29,6 @@ jobs:
         run: |
           gcloud compute instance-templates create mig-ci-cd-github-${{ github.run_number }} \
           --machine-type=e2-micro \
-          --service-account=mig-ci-cd-github@first-rank-coders.iam.gserviceaccount.com\
           --tags=allow-fastapi \
           --metadata-from-file startup-script=fastapi-mig-ci-cd/startup.sh
     

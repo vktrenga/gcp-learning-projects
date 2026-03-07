@@ -1,12 +1,18 @@
 #!/bin/bash
 
-apt update
-apt install -y python3-pip git
+set -e
+
+apt-get update
+apt-get install -y git python3-pip python3-venv
+
+cd /opt
 
 git clone https://github.com/vktrenga/gcp-learning-projects.git
 
 cd gcp-learning-projects/fastapi-mig-ci-cd
 
-pip3 install -r requirements.txt
+python3 -m venv venv
 
-nohup uvicorn main:app --host 0.0.0.0 --port 8000 &
+venv/bin/pip install -r requirements.txt
+
+nohup venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 &

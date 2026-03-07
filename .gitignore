@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *.so
 *.egg
+*.pyc
 *.egg-info/
 dist/
 build/
@@ -15,17 +16,21 @@ ENV/
 # VS Code settings
 .vscode/
 
-# OS files
-.DS_Store
-Thumbs.db
-
-# Test outputs
+# Other
 *.log
+*.env
+*.DS_Store
 
-# Python packaging
-*.pyo
-*.pyd
+# Ignore shell scripts
+*.sh
 
-# Misc
-*.swp
-*.swo
+# Ignore Jupyter Notebooks
+*.ipynb
+
+# Ignore test outputs
+htmlcov/
+.coverage
+
+# Ignore OS files
+Thumbs.db
+desktop.ini

@@ -22,7 +22,6 @@ jobs:
         with:
           workload_identity_provider: projects/927058090633/locations/global/workloadIdentityPools/mig-github-ci-cd-work-load/providers/github-provider
           service_account: mig-github-ci-cd@first-rank-coders.iam.gserviceaccount.com
-          audience: https://iam.googleapis.com/projects/927058090633/locations/global/workloadIdentityPools/mig-github-ci-cd-work-load/providers/github-provider
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
 

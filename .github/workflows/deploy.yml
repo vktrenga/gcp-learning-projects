@@ -33,6 +33,6 @@ jobs:
 
       - name: Update MIG
         run: |
-          gcloud compute instance-groups managed set-instance-template fastapi-mig-group \
+          gcloud compute instance-groups managed set-instance-template mig-ci-cd \
           --template fastapi-template-${{ github.run_number }} \
           --zone us-central1-c

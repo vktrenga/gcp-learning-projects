@@ -38,3 +38,8 @@ jobs:
           gcloud compute instance-groups managed set-instance-template mig-ci-cd \
           --template fastapi-template-${{ github.run_number }} \
           --zone us-central1-c
+      
+      - name: Rolling update MIG
+        run: |
+          gcloud compute instance-groups managed rolling-action replace mig-ci-cd \
+            --zone us-central1-c

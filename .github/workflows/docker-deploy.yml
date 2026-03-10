@@ -15,6 +15,7 @@ jobs:
 
     - name: Build Docker Image
       run: |
+        cd fastapi-mig-ci-cd-docker
         docker build -t fastapi-app .
 
     - name: Test Container

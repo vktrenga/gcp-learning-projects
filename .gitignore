@@ -21,8 +21,8 @@ ENV/
 *.env
 *.DS_Store
 
-# Ignore shell scripts
-*.sh
+# # Ignore shell scripts
+# *.sh
 
 # Ignore Jupyter Notebooks
 *.ipynb

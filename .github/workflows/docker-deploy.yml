@@ -8,18 +8,38 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
 
     - name: Checkout Code
       uses: actions/checkout@v3
 
-    - name: Build Docker Image
-      run: |
-        cd fastapi-mig-ci-cd-docker
-        docker build -t fastapi-app .
+    # Authenticate to Google Cloud
+    - name: Authenticate to GCP
+      uses: google-github-actions/auth@v2
+      with:
+        workload_identity_provider: projects/927058090633/locations/global/workloadIdentityPools/fastapi-docker-github-action/providers/fast-api-docker-github-provider
+        service_account: fastapi-docker-githubaction@first-rank-coders.iam.gserviceaccount.com
 
-    - name: Test Container
+    # Install gcloud
+    - name: Setup gcloud
+      uses: google-github-actions/setup-gcloud@v2
+
+    # Configure Docker for Artifact Registry
+    - name: Configure Docker
       run: |
-        docker run -d -p 8000:8000 fastapi-app
-        sleep 5
-        curl http://localhost:8000
+        gcloud auth configure-docker us-central1-docker.pkg.dev
+
+    # Build Docker Image
+    - name: Build Docker Image
+      run: | 
+        cd fastapi-mig-ci-cd-docker
+        docker build -t us-central1-docker.pkg.dev/first-rank-coders/mig-docker-github-fastapi/fastapi:latest .
+
+    # Push Image to Artifact Registry
+    - name: Push Docker Image
+      run: |
+        docker push us-central1-docker.pkg.dev/first-rank-coders/mig-docker-github-fastapi/fastapi:latest

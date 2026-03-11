@@ -53,7 +53,7 @@ jobs:
           --service-account=fastapi-docker-githubaction@first-rank-coders.iam.gserviceaccount.com \
           --scopes=https://www.googleapis.com/auth/cloud-platform \
           --tags=allow-fastapi \
-          --metadata-from-file startup-script=fastapi-mig-ci-cd/startup.sh
+          --metadata-from-file startup-script=fastapi-mig-ci-cd-docker/startup.sh
 
       # Update Managed Instance Group Template
       - name: Update MIG Template
